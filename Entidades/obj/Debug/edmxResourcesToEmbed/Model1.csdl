@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="L3MModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="COMPRA">
+    <Key>
+      <PropertyRef Name="Compra_ID" />
+    </Key>
+    <Property Name="Suc_ID" Type="Int32" Nullable="false" />
+    <Property Name="Prod_codigo" Type="Int32" Nullable="false" />
+    <Property Name="Prov_cedula" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Foto_compra" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Fecha_Registro" Type="DateTime" Precision="0" />
+    <Property Name="Fecha_Real" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Monto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Compra_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.Compra_Producto" FromRole="COMPRA" ToRole="PRODUCTO" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.Compra_Proveedor" FromRole="COMPRA" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="SUCURSAL" Relationship="Self.Compra_Sucursal" FromRole="COMPRA" ToRole="SUCURSAL" />
+    <NavigationProperty Name="PRODUCTOes" Relationship="Self.Producto_Compra" FromRole="COMPRA" ToRole="PRODUCTO" />
+  </EntityType>
+  <EntityType Name="CRONOGRAMA">
+    <Key>
+      <PropertyRef Name="Suc_ID" />
+      <PropertyRef Name="Trab_Cedula" />
+    </Key>
+    <Property Name="Suc_ID" Type="Int32" Nullable="false" />
+    <Property Name="Trab_Cedula" Type="Int32" Nullable="false" />
+    <Property Name="Fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Fecha_Final" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Horas_Laboradas" Type="Int32" Nullable="false" />
+    <Property Name="Horas_Extra" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TRABAJADOR" Relationship="Self.Cronograma_Trabajador" FromRole="CRONOGRAMA" ToRole="TRABAJADOR" />
+    <NavigationProperty Name="SUCURSAL" Relationship="Self.Cronograma_Sucursal" FromRole="CRONOGRAMA" ToRole="SUCURSAL" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="Prod_Codigo" />
+    </Key>
+    <Property Name="Prod_Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Comp_ID" Type="Int32" Nullable="false" />
+    <Property Name="Precio_Compra" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Precio_Venta" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Unid_Compradas" Type="Int32" Nullable="false" />
+    <Property Name="Impuesto" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Descuento" Type="Int32" Nullable="false" />
+    <Property Name="Ganancia" Type="Double" Nullable="false" />
+    <NavigationProperty Name="COMPRAs" Relationship="Self.Compra_Producto" FromRole="PRODUCTO" ToRole="COMPRA" />
+    <NavigationProperty Name="COMPRA" Relationship="Self.Producto_Compra" FromRole="PRODUCTO" ToRole="COMPRA" />
+    <NavigationProperty Name="VENTAs" Relationship="Self.Venta_Producto" FromRole="PRODUCTO" ToRole="VENTA" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR">
+    <Key>
+      <PropertyRef Name="Prov_Cedula" />
+    </Key>
+    <Property Name="Prov_Cedula" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="Int32" />
+    <NavigationProperty Name="COMPRAs" Relationship="Self.Compra_Proveedor" FromRole="PROVEEDOR" ToRole="COMPRA" />
+  </EntityType>
+  <EntityType Name="ROL">
+    <Key>
+      <PropertyRef Name="Trab_Cedula" />
+      <PropertyRef Name="Rol1" />
+    </Key>
+    <Property Name="Trab_Cedula" Type="Int32" Nullable="false" />
+    <Property Name="Rol1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TRABAJADOR" Relationship="Self.Rol_Trabajador" FromRole="ROL" ToRole="TRABAJADOR" />
+  </EntityType>
+  <EntityType Name="SUCURSAL">
+    <Key>
+      <PropertyRef Name="Suc_ID" />
+    </Key>
+    <Property Name="Suc_ID" Type="Int32" Nullable="false" />
+    <Property Name="Telefono" Type="Int32" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Admin_Cedula" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="COMPRAs" Relationship="Self.Compra_Sucursal" FromRole="SUCURSAL" ToRole="COMPRA" />
+    <NavigationProperty Name="CRONOGRAMAs" Relationship="Self.Cronograma_Sucursal" FromRole="SUCURSAL" ToRole="CRONOGRAMA" />
+    <NavigationProperty Name="TRABAJADOR" Relationship="Self.Sucursal_Trabajador" FromRole="SUCURSAL" ToRole="TRABAJADOR" />
+    <NavigationProperty Name="VENTAs" Relationship="Self.Venta_Sucursal" FromRole="SUCURSAL" ToRole="VENTA" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TRABAJADOR">
+    <Key>
+      <PropertyRef Name="Trab_Cedula" />
+    </Key>
+    <Property Name="Trab_Cedula" Type="Int32" Nullable="false" />
+    <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Nombre" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salario_hora" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CRONOGRAMAs" Relationship="Self.Cronograma_Trabajador" FromRole="TRABAJADOR" ToRole="CRONOGRAMA" />
+    <NavigationProperty Name="ROLs" Relationship="Self.Rol_Trabajador" FromRole="TRABAJADOR" ToRole="ROL" />
+    <NavigationProperty Name="SUCURSALs" Relationship="Self.Sucursal_Trabajador" FromRole="TRABAJADOR" ToRole="SUCURSAL" />
+    <NavigationProperty Name="VENTAs" Relationship="Self.Venta_Trabajador" FromRole="TRABAJADOR" ToRole="VENTA" />
+  </EntityType>
+  <EntityType Name="VENTA">
+    <Key>
+      <PropertyRef Name="Fact_numero" />
+    </Key>
+    <Property Name="Suc_ID" Type="Int32" Nullable="false" />
+    <Property Name="Prod_Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Trab_Cedula" Type="Int32" Nullable="false" />
+    <Property Name="Descuento" Type="Int32" Nullable="false" />
+    <Property Name="Unid_vendidas" Type="Int32" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Fact_numero" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.Venta_Producto" FromRole="VENTA" ToRole="PRODUCTO" />
+    <NavigationProperty Name="SUCURSAL" Relationship="Self.Venta_Sucursal" FromRole="VENTA" ToRole="SUCURSAL" />
+    <NavigationProperty Name="TRABAJADOR" Relationship="Self.Venta_Trabajador" FromRole="VENTA" ToRole="TRABAJADOR" />
+  </EntityType>
+  <Association Name="Compra_Producto">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="Prod_Codigo" />
+      </Principal>
+      <Dependent Role="COMPRA">
+        <PropertyRef Name="Prod_codigo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Compra_Proveedor">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="Prov_Cedula" />
+      </Principal>
+      <Dependent Role="COMPRA">
+        <PropertyRef Name="Prov_cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Compra_Sucursal">
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSAL">
+        <PropertyRef Name="Suc_ID" />
+      </Principal>
+      <Dependent Role="COMPRA">
+        <PropertyRef Name="Suc_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Producto_Compra">
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="1" />
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMPRA">
+        <PropertyRef Name="Compra_ID" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="Comp_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Cronograma_Trabajador">
+    <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="1" />
+    <End Role="CRONOGRAMA" Type="Self.CRONOGRAMA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJADOR">
+        <PropertyRef Name="Trab_Cedula" />
+      </Principal>
+      <Dependent Role="CRONOGRAMA">
+        <PropertyRef Name="Trab_Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Cronograma_Sucursal">
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+    <End Role="CRONOGRAMA" Type="Self.CRONOGRAMA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSAL">
+        <PropertyRef Name="Suc_ID" />
+      </Principal>
+      <Dependent Role="CRONOGRAMA">
+        <PropertyRef Name="Suc_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Venta_Producto">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="Prod_Codigo" />
+      </Principal>
+      <Dependent Role="VENTA">
+        <PropertyRef Name="Prod_Codigo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Rol_Trabajador">
+    <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="1" />
+    <End Role="ROL" Type="Self.ROL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJADOR">
+        <PropertyRef Name="Trab_Cedula" />
+      </Principal>
+      <Dependent Role="ROL">
+        <PropertyRef Name="Trab_Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Sucursal_Trabajador">
+    <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="1" />
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJADOR">
+        <PropertyRef Name="Trab_Cedula" />
+      </Principal>
+      <Dependent Role="SUCURSAL">
+        <PropertyRef Name="Admin_Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Venta_Sucursal">
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+    <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSAL">
+        <PropertyRef Name="Suc_ID" />
+      </Principal>
+      <Dependent Role="VENTA">
+        <PropertyRef Name="Suc_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Venta_Trabajador">
+    <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="1" />
+    <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJADOR">
+        <PropertyRef Name="Trab_Cedula" />
+      </Principal>
+      <Dependent Role="VENTA">
+        <PropertyRef Name="Trab_Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="L3MEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="COMPRAs" EntityType="Self.COMPRA" />
+    <EntitySet Name="CRONOGRAMAs" EntityType="Self.CRONOGRAMA" />
+    <EntitySet Name="PRODUCTOes" EntityType="Self.PRODUCTO" />
+    <EntitySet Name="PROVEEDORs" EntityType="Self.PROVEEDOR" />
+    <EntitySet Name="ROLs" EntityType="Self.ROL" />
+    <EntitySet Name="SUCURSALs" EntityType="Self.SUCURSAL" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TRABAJADORs" EntityType="Self.TRABAJADOR" />
+    <EntitySet Name="VENTAs" EntityType="Self.VENTA" />
+    <AssociationSet Name="Compra_Producto" Association="Self.Compra_Producto">
+      <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+      <End Role="COMPRA" EntitySet="COMPRAs" />
+    </AssociationSet>
+    <AssociationSet Name="Compra_Proveedor" Association="Self.Compra_Proveedor">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDORs" />
+      <End Role="COMPRA" EntitySet="COMPRAs" />
+    </AssociationSet>
+    <AssociationSet Name="Compra_Sucursal" Association="Self.Compra_Sucursal">
+      <End Role="SUCURSAL" EntitySet="SUCURSALs" />
+      <End Role="COMPRA" EntitySet="COMPRAs" />
+    </AssociationSet>
+    <AssociationSet Name="Producto_Compra" Association="Self.Producto_Compra">
+      <End Role="COMPRA" EntitySet="COMPRAs" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+    </AssociationSet>
+    <AssociationSet Name="Cronograma_Trabajador" Association="Self.Cronograma_Trabajador">
+      <End Role="TRABAJADOR" EntitySet="TRABAJADORs" />
+      <End Role="CRONOGRAMA" EntitySet="CRONOGRAMAs" />
+    </AssociationSet>
+    <AssociationSet Name="Cronograma_Sucursal" Association="Self.Cronograma_Sucursal">
+      <End Role="SUCURSAL" EntitySet="SUCURSALs" />
+      <End Role="CRONOGRAMA" EntitySet="CRONOGRAMAs" />
+    </AssociationSet>
+    <AssociationSet Name="Venta_Producto" Association="Self.Venta_Producto">
+      <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+      <End Role="VENTA" EntitySet="VENTAs" />
+    </AssociationSet>
+    <AssociationSet Name="Rol_Trabajador" Association="Self.Rol_Trabajador">
+      <End Role="TRABAJADOR" EntitySet="TRABAJADORs" />
+      <End Role="ROL" EntitySet="ROLs" />
+    </AssociationSet>
+    <AssociationSet Name="Sucursal_Trabajador" Association="Self.Sucursal_Trabajador">
+      <End Role="TRABAJADOR" EntitySet="TRABAJADORs" />
+      <End Role="SUCURSAL" EntitySet="SUCURSALs" />
+    </AssociationSet>
+    <AssociationSet Name="Venta_Sucursal" Association="Self.Venta_Sucursal">
+      <End Role="SUCURSAL" EntitySet="SUCURSALs" />
+      <End Role="VENTA" EntitySet="VENTAs" />
+    </AssociationSet>
+    <AssociationSet Name="Venta_Trabajador" Association="Self.Venta_Trabajador">
+      <End Role="TRABAJADOR" EntitySet="TRABAJADORs" />
+      <End Role="VENTA" EntitySet="VENTAs" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(L3MModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(L3MModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

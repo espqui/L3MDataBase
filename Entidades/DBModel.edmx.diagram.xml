@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e29a385e665e40f2bfb570fcac590d99" Name="Diagram1">
+        <EntityTypeShape EntityType="L3MModel.COMPRA" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="L3MModel.CRONOGRAMA" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="L3MModel.PRODUCTO" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="L3MModel.PROVEEDOR" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="L3MModel.ROL" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="L3MModel.SUCURSAL" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="L3MModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="L3MModel.TRABAJADOR" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="L3MModel.VENTA" Width="1.5" PointX="9.75" PointY="7.875" IsExpanded="true" />
+        <AssociationConnector Association="L3MModel.Compra_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Compra_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Compra_Sucursal" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Producto_Compra" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Cronograma_Trabajador" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Cronograma_Sucursal" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Venta_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Rol_Trabajador" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Sucursal_Trabajador" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Venta_Sucursal" ManuallyRouted="false" />
+        <AssociationConnector Association="L3MModel.Venta_Trabajador" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

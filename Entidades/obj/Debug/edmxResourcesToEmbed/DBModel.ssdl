@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="L3MModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="COMPRA">
+    <Key>
+      <PropertyRef Name="Compra_ID" />
+    </Key>
+    <Property Name="Suc_ID" Type="int" Nullable="false" />
+    <Property Name="Prod_codigo" Type="int" Nullable="false" />
+    <Property Name="Prov_cedula" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Foto_compra" Type="image" />
+    <Property Name="Fecha_Registro" Type="date" />
+    <Property Name="Fecha_Real" Type="date" Nullable="false" />
+    <Property Name="Monto" Type="money" Nullable="false" />
+    <Property Name="Compra_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CRONOGRAMA">
+    <Key>
+      <PropertyRef Name="Suc_ID" />
+      <PropertyRef Name="Trab_Cedula" />
+    </Key>
+    <Property Name="Suc_ID" Type="int" Nullable="false" />
+    <Property Name="Trab_Cedula" Type="int" Nullable="false" />
+    <Property Name="Fecha_inicio" Type="date" Nullable="false" />
+    <Property Name="Fecha_Final" Type="date" Nullable="false" />
+    <Property Name="Horas_Laboradas" Type="int" Nullable="false" />
+    <Property Name="Horas_Extra" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="Prod_Codigo" />
+    </Key>
+    <Property Name="Prod_Codigo" Type="int" Nullable="false" />
+    <Property Name="Comp_ID" Type="int" Nullable="false" />
+    <Property Name="Precio_Compra" Type="money" Nullable="false" />
+    <Property Name="Precio_Venta" Type="money" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Nombre" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Unid_Compradas" Type="int" Nullable="false" />
+    <Property Name="Impuesto" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Descuento" Type="int" Nullable="false" />
+    <Property Name="Ganancia" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR">
+    <Key>
+      <PropertyRef Name="Prov_Cedula" />
+    </Key>
+    <Property Name="Prov_Cedula" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="Apellido1" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Apellido2" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Telefono" Type="int" />
+  </EntityType>
+  <EntityType Name="ROL">
+    <Key>
+      <PropertyRef Name="Trab_Cedula" />
+      <PropertyRef Name="Rol" />
+    </Key>
+    <Property Name="Trab_Cedula" Type="int" Nullable="false" />
+    <Property Name="Rol" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SUCURSAL">
+    <Key>
+      <PropertyRef Name="Suc_ID" />
+    </Key>
+    <Property Name="Suc_ID" Type="int" Nullable="false" />
+    <Property Name="Telefono" Type="int" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="Admin_Cedula" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TRABAJADOR">
+    <Key>
+      <PropertyRef Name="Trab_Cedula" />
+    </Key>
+    <Property Name="Trab_Cedula" Type="int" Nullable="false" />
+    <Property Name="Fecha_ingreso" Type="date" Nullable="false" />
+    <Property Name="Fecha_nacimiento" Type="date" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="Apellido1" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Apellido2" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Salario_hora" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VENTA">
+    <Key>
+      <PropertyRef Name="Fact_numero" />
+    </Key>
+    <Property Name="Suc_ID" Type="int" Nullable="false" />
+    <Property Name="Prod_Codigo" Type="int" Nullable="false" />
+    <Property Name="Trab_Cedula" Type="int" Nullable="false" />
+    <Property Name="Descuento" Type="int" Nullable="false" />
+    <Property Name="Unid_vendidas" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="Fact_numero" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="Compra-Producto">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="Prod_Codigo" />
+      </Principal>
+      <Dependent Role="COMPRA">
+        <PropertyRef Name="Prod_codigo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Compra-Proveedor">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="Prov_Cedula" />
+      </Principal>
+      <Dependent Role="COMPRA">
+        <PropertyRef Name="Prov_cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Compra-Sucursal">
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSAL">
+        <PropertyRef Name="Suc_ID" />
+      </Principal>
+      <Dependent Role="COMPRA">
+        <PropertyRef Name="Suc_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Cronograma_Trabajador">
+    <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="1" />
+    <End Role="CRONOGRAMA" Type="Self.CRONOGRAMA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJADOR">
+        <PropertyRef Name="Trab_Cedula" />
+      </Principal>
+      <Dependent Role="CRONOGRAMA">
+        <PropertyRef Name="Trab_Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Cronograma-Sucursal">
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+    <End Role="CRONOGRAMA" Type="Self.CRONOGRAMA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSAL">
+        <PropertyRef Name="Suc_ID" />
+      </Principal>
+      <Dependent Role="CRONOGRAMA">
+        <PropertyRef Name="Suc_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Producto-Compra">
+    <End Role="COMPRA" Type="Self.COMPRA" Multiplicity="1" />
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMPRA">
+        <PropertyRef Name="Compra_ID" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="Comp_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Rol-Trabajador">
+    <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="1" />
+    <End Role="ROL" Type="Self.ROL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJADOR">
+        <PropertyRef Name="Trab_Cedula" />
+      </Principal>
+      <Dependent Role="ROL">
+        <PropertyRef Name="Trab_Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Sucursal-Trabajador">
+    <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="1" />
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJADOR">
+        <PropertyRef Name="Trab_Cedula" />
+      </Principal>
+      <Dependent Role="SUCURSAL">
+        <PropertyRef Name="Admin_Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Venta_Trabajador">
+    <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="1" />
+    <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJADOR">
+        <PropertyRef Name="Trab_Cedula" />
+      </Principal>
+      <Dependent Role="VENTA">
+        <PropertyRef Name="Trab_Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Venta-Producto">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="Prod_Codigo" />
+      </Principal>
+      <Dependent Role="VENTA">
+        <PropertyRef Name="Prod_Codigo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Venta-Sucursal">
+    <End Role="SUCURSAL" Type="Self.SUCURSAL" Multiplicity="1" />
+    <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSAL">
+        <PropertyRef Name="Suc_ID" />
+      </Principal>
+      <Dependent Role="VENTA">
+        <PropertyRef Name="Suc_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="L3MModelStoreContainer">
+    <EntitySet Name="COMPRA" EntityType="Self.COMPRA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CRONOGRAMA" EntityType="Self.CRONOGRAMA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SUCURSAL" EntityType="Self.SUCURSAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRABAJADOR" EntityType="Self.TRABAJADOR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="Compra-Producto" Association="Self.Compra-Producto">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="COMPRA" EntitySet="COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="Compra-Proveedor" Association="Self.Compra-Proveedor">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="COMPRA" EntitySet="COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="Compra-Sucursal" Association="Self.Compra-Sucursal">
+      <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+      <End Role="COMPRA" EntitySet="COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="Cronograma_Trabajador" Association="Self.Cronograma_Trabajador">
+      <End Role="TRABAJADOR" EntitySet="TRABAJADOR" />
+      <End Role="CRONOGRAMA" EntitySet="CRONOGRAMA" />
+    </AssociationSet>
+    <AssociationSet Name="Cronograma-Sucursal" Association="Self.Cronograma-Sucursal">
+      <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+      <End Role="CRONOGRAMA" EntitySet="CRONOGRAMA" />
+    </AssociationSet>
+    <AssociationSet Name="Producto-Compra" Association="Self.Producto-Compra">
+      <End Role="COMPRA" EntitySet="COMPRA" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="Rol-Trabajador" Association="Self.Rol-Trabajador">
+      <End Role="TRABAJADOR" EntitySet="TRABAJADOR" />
+      <End Role="ROL" EntitySet="ROL" />
+    </AssociationSet>
+    <AssociationSet Name="Sucursal-Trabajador" Association="Self.Sucursal-Trabajador">
+      <End Role="TRABAJADOR" EntitySet="TRABAJADOR" />
+      <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+    </AssociationSet>
+    <AssociationSet Name="Venta_Trabajador" Association="Self.Venta_Trabajador">
+      <End Role="TRABAJADOR" EntitySet="TRABAJADOR" />
+      <End Role="VENTA" EntitySet="VENTA" />
+    </AssociationSet>
+    <AssociationSet Name="Venta-Producto" Association="Self.Venta-Producto">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="VENTA" EntitySet="VENTA" />
+    </AssociationSet>
+    <AssociationSet Name="Venta-Sucursal" Association="Self.Venta-Sucursal">
+      <End Role="SUCURSAL" EntitySet="SUCURSAL" />
+      <End Role="VENTA" EntitySet="VENTA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

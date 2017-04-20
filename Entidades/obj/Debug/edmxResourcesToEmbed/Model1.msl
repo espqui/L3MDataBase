@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="L3MModelStoreContainer" CdmEntityContainer="L3MEntities">
+    <EntitySetMapping Name="COMPRAs">
+      <EntityTypeMapping TypeName="L3MModel.COMPRA">
+        <MappingFragment StoreEntitySet="COMPRA">
+          <ScalarProperty Name="Suc_ID" ColumnName="Suc_ID" />
+          <ScalarProperty Name="Prod_codigo" ColumnName="Prod_codigo" />
+          <ScalarProperty Name="Prov_cedula" ColumnName="Prov_cedula" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Foto_compra" ColumnName="Foto_compra" />
+          <ScalarProperty Name="Fecha_Registro" ColumnName="Fecha_Registro" />
+          <ScalarProperty Name="Fecha_Real" ColumnName="Fecha_Real" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Compra_ID" ColumnName="Compra_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CRONOGRAMAs">
+      <EntityTypeMapping TypeName="L3MModel.CRONOGRAMA">
+        <MappingFragment StoreEntitySet="CRONOGRAMA">
+          <ScalarProperty Name="Suc_ID" ColumnName="Suc_ID" />
+          <ScalarProperty Name="Trab_Cedula" ColumnName="Trab_Cedula" />
+          <ScalarProperty Name="Fecha_inicio" ColumnName="Fecha_inicio" />
+          <ScalarProperty Name="Fecha_Final" ColumnName="Fecha_Final" />
+          <ScalarProperty Name="Horas_Laboradas" ColumnName="Horas_Laboradas" />
+          <ScalarProperty Name="Horas_Extra" ColumnName="Horas_Extra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTOes">
+      <EntityTypeMapping TypeName="L3MModel.PRODUCTO">
+        <MappingFragment StoreEntitySet="PRODUCTO">
+          <ScalarProperty Name="Prod_Codigo" ColumnName="Prod_Codigo" />
+          <ScalarProperty Name="Comp_ID" ColumnName="Comp_ID" />
+          <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
+          <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Unid_Compradas" ColumnName="Unid_Compradas" />
+          <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+          <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+          <ScalarProperty Name="Ganancia" ColumnName="Ganancia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROVEEDORs">
+      <EntityTypeMapping TypeName="L3MModel.PROVEEDOR">
+        <MappingFragment StoreEntitySet="PROVEEDOR">
+          <ScalarProperty Name="Prov_Cedula" ColumnName="Prov_Cedula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+          <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROLs">
+      <EntityTypeMapping TypeName="L3MModel.ROL">
+        <MappingFragment StoreEntitySet="ROL">
+          <ScalarProperty Name="Trab_Cedula" ColumnName="Trab_Cedula" />
+          <ScalarProperty Name="Rol1" ColumnName="Rol" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUCURSALs">
+      <EntityTypeMapping TypeName="L3MModel.SUCURSAL">
+        <MappingFragment StoreEntitySet="SUCURSAL">
+          <ScalarProperty Name="Suc_ID" ColumnName="Suc_ID" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Admin_Cedula" ColumnName="Admin_Cedula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="L3MModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRABAJADORs">
+      <EntityTypeMapping TypeName="L3MModel.TRABAJADOR">
+        <MappingFragment StoreEntitySet="TRABAJADOR">
+          <ScalarProperty Name="Trab_Cedula" ColumnName="Trab_Cedula" />
+          <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
+          <ScalarProperty Name="Fecha_nacimiento" ColumnName="Fecha_nacimiento" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+          <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+          <ScalarProperty Name="Salario_hora" ColumnName="Salario_hora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VENTAs">
+      <EntityTypeMapping TypeName="L3MModel.VENTA">
+        <MappingFragment StoreEntitySet="VENTA">
+          <ScalarProperty Name="Suc_ID" ColumnName="Suc_ID" />
+          <ScalarProperty Name="Prod_Codigo" ColumnName="Prod_Codigo" />
+          <ScalarProperty Name="Trab_Cedula" ColumnName="Trab_Cedula" />
+          <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+          <ScalarProperty Name="Unid_vendidas" ColumnName="Unid_vendidas" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Fact_numero" ColumnName="Fact_numero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="L3MModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="L3MModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="L3MModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="L3MModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="L3MModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="L3MModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="L3MModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="L3MModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="L3MModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>
